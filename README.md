@@ -1,5 +1,5 @@
-# Resume Classifier App
+# Churn Prediction App
 
 ## Data
 
-Resume Data is provided via https://www.kaggle.com/datasets/snehaanbhawal/resume-dataset which is under Public Domain.
+Customer Churn Data is provided via https://www.kaggle.com/datasets/blastchar/telco-customer-churn/data
