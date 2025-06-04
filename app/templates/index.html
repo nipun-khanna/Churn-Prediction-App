@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churn Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        label, input { display: block; margin-bottom: 10px; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Churn Prediction</h1>
+        <form id="predictionForm">
+            <label for="tenure">Tenure (months):</label>
+            <input type="number" id="tenure" name="tenure" value="24" required>
+
+            <label for="monthly_charges">Monthly Charges:</label>
+            <input type="number" step="0.01" id="monthly_charges" name="monthly_charges" value="70.50" required>
+
+            <label for="contract_type">Contract Type (0=Month-to-month, 1=Two year, etc.):</label>
+            <input type="number" id="contract_type" name="contract_type" value="0" required>
+
+            <button type="submit">Predict Churn</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const tenure = parseFloat(document.getElementById('tenure').value);
+            const monthly_charges = parseFloat(document.getElementById('monthly_charges').value);
+            const contract_type = parseInt(document.getElementById('contract_type').value);
+
+            const data = {
+                tenure: tenure,
+                monthly_charges: monthly_charges,
+                contract_type: contract_type
+            };
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                const resultDiv = document.getElementById('result');
+
+                if (response.ok) {
+                    let churnText = result.churn_prediction === 1 ? 'YES (likely to churn)' : 'NO (unlikely to churn)';
+                    resultDiv.innerHTML = `Prediction: <strong>${churnText}</strong><br>
+                                           Probability of Churn: <strong>${(result.churn_probability * 100).toFixed(2)}%</strong>`;
+                    resultDiv.style.color = result.churn_prediction === 1 ? 'red' : 'green';
+                } else {
+                    resultDiv.innerHTML = `Error: ${result.error || 'Unknown error'}`;
+                    resultDiv.style.color = 'red';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `Network Error: ${error}`;
+                document.getElementById('result').style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
