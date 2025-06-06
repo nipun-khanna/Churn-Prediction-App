@@ -28,12 +28,13 @@ def predict_churn():
   try:
     data = request.get_json(force=True)
 
-    required_features = ["tenure", "monthly_charges", "contract_type"]
+    required_features = ["tenure", "MonthlyCharges", "Contract_Month-to-month", "Contract_One year", "Contract_Two year"]
     for feature in required_features:
-      if feature not in data or not isinstance(data[feature], (int, float)):
+      if feature not in data:
         return jsonify({"error": f"Missing or invalid data for feature: {feature}"}), 400
 
     input_df = pd.DataFrame([data], columns=required_features)
+    
     prediction = model.predict(input_df)[0]
     prediction_proba = model.predict_proba(input_df)[0][1]
 
@@ -52,6 +53,7 @@ def predict_churn():
 @app.route('/')
 def home():
   return render_template("index.html")
+
 
 if __name__ == '__main__':
   app.run(debug=True)

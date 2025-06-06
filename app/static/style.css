@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body { 
+    display: flex;
+    place-content: center;
+    place-items: center;
+    font-family: Arial, sans-serif; 
+    margin: 20px; 
+    background-color: rgb(48, 44, 41);
+}
+
+.container { 
+    margin: auto; 
+    padding: 20px; 
+    color: white;
+}
+
+.container-head {
+    padding: 20px;
+}
+
+.contract-type {
+    display: block; 
+    margin-bottom: 10px; 
+}
+
+label, input { 
+    display: block; 
+    margin-bottom: 10px; 
+}
+
+input[type="text"], input[type="number"] { 
+    width: 100%; 
+    padding: 8px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+}
+
+button { 
+    padding: 10px 15px; 
+    background-color: #dac488; 
+    color: rgb(0, 0, 0); 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+}
+
+button:hover { 
+    background-color: #5a5138; 
+}
+
+#result { 
+    margin-top: 20px; 
+    font-weight: bold; 
+}
