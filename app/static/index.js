@@ -4,8 +4,8 @@ async function submitForm(event) {
     event.preventDefault();
 
     const tenure = parseFloat(document.getElementById('tenure').value);
+    const total_charges = parseFloat(document.getElementById('total-charges').value);
     const monthly_charges = parseFloat(document.getElementById('monthly-charges').value);
-
 
     const contract_type = document.getElementById('contract-type');
     const index = contract_type.selectedIndex;
@@ -14,6 +14,7 @@ async function submitForm(event) {
 
     const data = {
         "tenure": tenure,
+        "TotalCharges": total_charges,
         "MonthlyCharges": monthly_charges,
         "Contract_Month-to-month": contract_features[0],
         "Contract_One year": contract_features[1],
