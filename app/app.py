@@ -29,13 +29,16 @@ def predict_churn():
   try:
     data = request.get_json(force=True)
 
-    required_features = ["tenure", "TotalCharges", "MonthlyCharges", "Contract_Month-to-month", "Contract_One year", "Contract_Two year"]
+    required_features = ["tenure", "TotalCharges", "MonthlyCharges", "Contract_Month-to-month", "Contract_One year", "Contract_Two year", 
+                         "Partner", "Dependents", "PhoneService", "PaperlessBilling"]
+    
     for feature in required_features:
       if feature not in data:
         return jsonify({"error": f"Missing or invalid data for feature: {feature}"}), 400
 
     input_df = pd.DataFrame([data], columns=required_features)
     df = transform_data(input_df)
+    logging.info(df.head())
     
     prediction = model.predict(df)[0]
     prediction_proba = model.predict_proba(df)[0][1]

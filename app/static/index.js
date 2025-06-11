@@ -3,16 +3,31 @@ document.getElementById('prediction-form').addEventListener('submit', submitForm
 async function submitForm(event) {
     event.preventDefault();
 
+    const genderVal = document.querySelector("input[name='gender']:checked").value;
+    const gender = genderVal == "female" ? 1 : 0;
+    const senCitVal = document.querySelector("input[name='senior-citizen']:checked").value;
+    const seniorCitizen = senCitVal == "yes" ? 1 : 0;
+    const partner = document.getElementById("partner").checked ? 1 : 0;
+    const dependents = document.getElementById("dependents").checked ? 1 : 0;
+    const phoneService = document.getElementById("phone-service").checked ? 1 : 0;
+    const paperlessBilling = document.getElementById("paperless-billing").checked ? 1 : 0;
+
     const tenure = parseFloat(document.getElementById('tenure').value);
     const total_charges = parseFloat(document.getElementById('total-charges').value);
     const monthly_charges = parseFloat(document.getElementById('monthly-charges').value);
 
     const contract_type = document.getElementById('contract-type');
     const index = contract_type.selectedIndex;
-    const contract_features = [false, false, false]
-    contract_features[index] = true
+    const contract_features = [false, false, false];
+    contract_features[index] = true;
 
     const data = {
+        "gender": gender,
+        "SeniorCitizen": seniorCitizen,
+        "Partner": partner,
+        "Dependents": dependents,
+        "PhoneService": phoneService,
+        "PaperlessBilling": paperlessBilling,
         "tenure": tenure,
         "TotalCharges": total_charges,
         "MonthlyCharges": monthly_charges,

@@ -28,13 +28,13 @@ body {
     gap: 0.4rem
 }
 
-.gender-input {
+.radio-container {
     display: flex;
     flex-direction: column;
     gap: 2px
 }
 
-.gender-radio {
+.simple-radio {
     display: flex;
     gap: 0.5rem
 }

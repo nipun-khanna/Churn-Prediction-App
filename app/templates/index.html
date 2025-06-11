@@ -10,16 +10,52 @@
     <div class="container">
         <h1 class="container-head">Customer Churn Predictor</h1>
         <form id="prediction-form">
-            <div class="gender-input">
+            <div class="radio-container">
                 <p style="padding-bottom: 5px;">Gender</p>
-                <div class="gender-radio">
+                <div class="simple-radio">
                     <input type="radio" id="gender-female" name="gender" value="female" required>
                     <label for="gender-female">Female</label>
                 </div>
 
-                <div class="gender-radio">
+                <div class="simple-radio">
                     <input type="radio" id="gender-male" name="gender" value="male" required>
                     <label for="gender-male">Male</label>
+                </div>
+            </div>
+
+            <div class="radio-container">
+                <p style="padding-bottom: 5px;">Is the customer a senior citizen?</p>
+                <div class="simple-radio">
+                    <input type="radio" id="senior-citizen-yes" name="senior-citizen" value="yes" required>
+                    <label for="senior-citizen-yes">Yes</label>
+                </div>
+
+                <div class="simple-radio">
+                    <input type="radio" id="senior-citizen-no" name="senior-citizen" value="no" required>
+                    <label for="senior-citizen-no">No</label>
+                </div>
+            </div>
+
+            <div class="radio-container">
+                <p style="padding-bottom: 10px;">Check the boxes below if the customer...</p>
+                <div class="simple-radio">
+                    <label for="partner">Has a Partner/Spouse?</label>
+                    <input type="checkbox" id="partner" name="partner">
+                </div>
+
+                <div class="simple-radio">
+                    <label for="dependents">Has Dependents?</label>
+                    <input type="checkbox" id="dependents" name="dependents">
+                </div>
+
+                <div class="simple-radio">
+                    <label for="partner">Has a Phone Service?</label>
+                    <input type="checkbox" id="phone-service" name="phone-service">
+                </div>
+
+                <div class="simple-radio">
+                    <label for="partner">Has Paperless Billing?</label>
+                    <input type="checkbox" id="paperless-billing" name="paperless-billing">
                 </div>
             </div>
 
